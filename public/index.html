@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OBS Scene Switcher</title>
+  </head>
+  <body>
+    <h1>Change OBS Scene</h1>
+    <button onclick="changeScene('Scene 1')">Change to Scene 1</button>
+    <button onclick="changeScene('Scene 2')">Change to Scene 2</button>
+
+    <script>
+      async function changeScene(sceneName) {
+        try {
+          const response = await fetch("/change-scene", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ sceneName }),
+          });
+
+          const result = await response.json();
+          alert(result.message);
+        } catch (error) {
+          alert("Failed to change scene");
+          console.error(error);
+        }
+      }
+    </script>
+  </body>
+</html>
